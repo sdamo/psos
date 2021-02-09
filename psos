@@ -81,14 +81,29 @@ function output_rrd {
 
 function help_message {
 
-    echo "Usage: $0 [опции]"
+    echo -e "USAGE: $0 [опции]\n"
+
+    echo "OPTIONS:"
     echo -e "\t-i <IP-адрес> IP-адрес"
     echo -e "\t-c <комьюнити>"
     echo -e "\t-p <процесс> Имя процесса"
     echo -e "\t-o <формат>"
     echo -e "\t-t <количество>"
+
     exit 1
+
 }
+
+if [[ $# -eq 0 ]]
+then
+
+    echo "Not options"
+
+    help_message
+
+    exit 1
+
+fi
 
 while getopts ":i:c:p:o:t:h" OPTIONS
 do
@@ -155,6 +170,3 @@ then
     output${OUTPUT_FORMAT} end
 
 fi
-
-# top
-# | sort -r -n -t : -k 2.1 | head -n 10 | sed 's/\ =\ INTEGER://;s/^.*\.//'
